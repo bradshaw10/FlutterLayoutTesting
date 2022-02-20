@@ -39,6 +39,44 @@ class MyApp extends StatelessWidget {
         const Text('41'),
       ]),
     );
+    Column _buildButtonColumn(Color color, IconData icon, String label) {
+      return Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(icon, color: color),
+          Container(
+            margin: const EdgeInsets.only(top: 8),
+            child: Text(
+              label,
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w400,
+                color: color,
+              ),
+            ),
+          )
+        ],
+      );
+    }
+
+    Color color = Theme.of(context).primaryColor;
+
+    Widget buttonSection = Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        _buildButtonColumn(color, Icons.call, 'CALL'),
+        _buildButtonColumn(color, Icons.near_me, 'ROUTE'),
+        _buildButtonColumn(color, Icons.share, 'SHARE')
+      ],
+    );
+
+    Widget textSection = const Padding(
+        padding: EdgeInsets.all(32),
+        child: Text(
+          'My current position is Mobile Applications Developer at Retail Integration Ltd. Located in Dublin. Retail Integration is one of Irelands leading EPOS providers. As Mobile Applications Developer I create, deploy, and maintain a series of business-to-business applications, used by our clients daily to ease their everyday tasks. While working here, I have created and maintained applications in several frameworks, including Unity, Xamarin Forms, and native Android through Android Studio.',
+          softWrap: true,
+        ));
 
     return MaterialApp(
         title: 'Flutter Layout Testing',
@@ -46,7 +84,7 @@ class MyApp extends StatelessWidget {
           appBar: AppBar(
             title: const Text('Layout Tester'),
           ),
-          body: Column(children: [titleSection]),
+          body: Column(children: [titleSection, buttonSection, textSection]),
         ));
   }
 }
